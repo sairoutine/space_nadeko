@@ -94,7 +94,7 @@ $(function () {
         var w = texture.image.width, h = texture.image.height;
 
         sprite = new THREE.Sprite(material);
-        sprite.position.set(w * 1.25, h * 0.5, -9999);
+        sprite.position.set(w * 1, h * 0.5, -9999);
         sprite.scale.set(w / 2, h / 2, 1);
         scene2d.add(sprite);
       });
