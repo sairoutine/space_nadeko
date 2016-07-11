@@ -1,10 +1,16 @@
+/* global $, THREE */
+
+'use strict';
+
+var WIDTH = window.innerWidth;
+var HEIGHT = window.innerHeight;
 $(function () { 
   var scene = new THREE.Scene(); 
-  var camera = new THREE.PerspectiveCamera(45 , window.innerWidth / window.innerHeight , 0.1, 1000); 
+  var camera = new THREE.PerspectiveCamera(45 , WIDTH / HEIGHT , 0.1, 1000); 
   var renderer = new THREE.WebGLRenderer(); 
 
   renderer.setSize(window.innerWidth, window.innerHeight);  
-  
+  renderer.autoClear = false ;
   var planetGeometry = new THREE.SphereGeometry(4,20,20); 
   
   //Load the planet textures
@@ -77,6 +83,23 @@ $(function () {
   spotLight2.intensity = 1.5;
   scene.add( spotLight2 );
 
+  var camera2d, scene2d;
+     (function init2D() {
+      camera2d = new THREE.OrthographicCamera(45 , WIDTH / HEIGHT , 0.1, 1000); 
+      scene2d = new THREE.Scene();
+    
+      THREE.ImageUtils.loadTexture("img/ndk.png", undefined, function(texture) {
+        var material = new THREE.SpriteMaterial({map: texture});
+        var sprite;
+        var w = texture.image.width, h = texture.image.height;
+
+        sprite = new THREE.Sprite(material);
+        sprite.position.set(w * 1.25, h * 0.5, -9999);
+        sprite.scale.set(w / 2, h / 2, 1);
+        scene2d.add(sprite);
+      });
+    })();
+
   $("#WebGL-output"). append(renderer.domElement); 
  
   //call render loop once
@@ -89,6 +112,7 @@ $(function () {
     planet.rotation.y += 0.002;
     spacesphere.rotation.y += 0.001;
     renderer.render(scene, camera); 
-  };
+	renderer.render(scene2d, camera2d);
+  }
 
 });
