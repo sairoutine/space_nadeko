@@ -84,21 +84,9 @@ $(function () {
 	spotLight2.intensity = 1.5;
 	scene.add( spotLight2 );
 
-	var camera2d, scene2d;
-	(function init2D() {
-		camera2d = new THREE.OrthographicCamera(45 , WIDTH / HEIGHT , 0.1, 1000); 
-		scene2d = new THREE.Scene();
+	var camera2d = new THREE.OrthographicCamera(45 , WIDTH / HEIGHT , 0.1, 1000);
 
-		var texture = THREE.ImageUtils.loadTexture("img/ndk.png");
-		var material = new THREE.SpriteMaterial({map: texture});
-		var sprite;
-		var w = texture.image.width, h = texture.image.height;
-
-		sprite = new THREE.Sprite(material);
-		sprite.position.set(w * 1, h * 0.5, -9999);
-		sprite.scale.set(w / 2, h / 2, 1);
-		scene2d.add(sprite);
-	})();
+	var scene2d = create2DScene();
 
 	$("#WebGL-output"). append(renderer.domElement);
 	//call render loop once
@@ -112,4 +100,23 @@ $(function () {
 		renderer.render(scene, camera);
 		renderer.render(scene2d, camera2d);
 	}
+
+	function create2DScene() {
+		var scene2d = new THREE.Scene();
+
+		var texture = THREE.ImageUtils.loadTexture("img/ndk.png");
+		var material = new THREE.SpriteMaterial({map: texture});
+		var sprite;
+		var w = texture.image.width, h = texture.image.height;
+
+		sprite = new THREE.Sprite(material);
+		sprite.position.set(w * 1, h * 0.5, -9999);
+		sprite.scale.set(w / 2, h / 2, 1);
+		scene2d.add(sprite);
+
+		return scene2d;
+	}
+
+
+
 });
