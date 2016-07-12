@@ -89,16 +89,15 @@ $(function () {
 		camera2d = new THREE.OrthographicCamera(45 , WIDTH / HEIGHT , 0.1, 1000); 
 		scene2d = new THREE.Scene();
 
-		THREE.ImageUtils.loadTexture("img/ndk.png", undefined, function(texture) {
-			var material = new THREE.SpriteMaterial({map: texture});
-			var sprite;
-			var w = texture.image.width, h = texture.image.height;
+		var texture = THREE.ImageUtils.loadTexture("img/ndk.png");
+		var material = new THREE.SpriteMaterial({map: texture});
+		var sprite;
+		var w = texture.image.width, h = texture.image.height;
 
-			sprite = new THREE.Sprite(material);
-			sprite.position.set(w * 1, h * 0.5, -9999);
-			sprite.scale.set(w / 2, h / 2, 1);
-			scene2d.add(sprite);
-		});
+		sprite = new THREE.Sprite(material);
+		sprite.position.set(w * 1, h * 0.5, -9999);
+		sprite.scale.set(w / 2, h / 2, 1);
+		scene2d.add(sprite);
 	})();
 
 	$("#WebGL-output"). append(renderer.domElement);
