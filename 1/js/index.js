@@ -7,8 +7,10 @@ $(function () {
 	// 惑星
 	var planet = (function() {
 
+		// 球体(radius, widthSegments, heightSegments)
 		var planetGeometry = new THREE.SphereGeometry(4,20,20);
 		var planetMaterial = (function() {
+			// A material for shiny surfaces
 			var planetMaterial = new THREE.MeshPhongMaterial();
 
 			var texture = THREE.ImageUtils.loadTexture("./img/planet-512.jpg");
