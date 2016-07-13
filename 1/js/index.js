@@ -9,6 +9,7 @@ $(function () {
 	renderer.setSize(window.innerWidth, window.innerHeight);
 	renderer.autoClear = false ;
 
+	// 惑星
 	var planet = (function() {
 		var planetGeometry = new THREE.SphereGeometry(4,20,20);
 
@@ -49,6 +50,7 @@ $(function () {
 		return planet;
 	})();
 
+	// 宇宙
 	var spacesphere = (function() {
 		//Space background is a large sphere
 		var spacetex = THREE.ImageUtils.loadTexture("./img/space.jpg");
