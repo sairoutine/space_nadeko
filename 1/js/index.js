@@ -17,7 +17,10 @@ $(function () {
 			planetMaterial.map = texture;
 
 			var specmap = THREE.ImageUtils.loadTexture("./img/water-map-512.jpg");
+			// affects both how much the specular surface highlight contributes and how much of the environment map affects the surface
 			planetMaterial.specularMap = specmap;
+
+			// 窪んでるところが赤く見える
 			planetMaterial.specular = new THREE.Color( 0xff0000 );
 			planetMaterial.shininess = 1;
 
