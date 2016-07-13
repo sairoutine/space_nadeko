@@ -99,31 +99,7 @@ $(function () {
 	var camera2d = new THREE.OrthographicCamera(45 , WIDTH / HEIGHT , 0.1, 1000);
 
 	// 2Dシーン
-	var scene2d = create2DScene();
-
-	var renderer = (function() {
-		var renderer = new THREE.WebGLRenderer();
-
-		renderer.setSize(window.innerWidth, window.innerHeight);
-		renderer.autoClear = false ;
-		return renderer;
-	})();
-
-	$("#WebGL-output"). append(renderer.domElement);
-	//call render loop once
-	render();
-	//render loop
-	function render() {
-		//rotate planet and spacesphere
-		planet.rotation.y += 0.002;
-		spacesphere.rotation.y += 0.001;
-		renderer.render(scene, camera);
-		renderer.render(scene2d, camera2d);
-
-		requestAnimationFrame(render);
-	}
-
-	function create2DScene() {
+	var scene2d = (function() {
 		var scene2d = new THREE.Scene();
 
 		var texture = THREE.ImageUtils.loadTexture("img/ndk.png");
@@ -137,5 +113,29 @@ $(function () {
 		scene2d.add(sprite);
 
 		return scene2d;
+	})();
+
+	// renderer
+	var renderer = (function() {
+		var renderer = new THREE.WebGLRenderer();
+
+		renderer.setSize(window.innerWidth, window.innerHeight);
+		renderer.autoClear = false ;
+		return renderer;
+	})();
+
+	$("#WebGL-output").append(renderer.domElement);
+
+	render();
+	function render() {
+		//rotate planet and spacesphere
+		planet.rotation.y += 0.002;
+		spacesphere.rotation.y += 0.001;
+
+		renderer.render(scene, camera);
+		renderer.render(scene2d, camera2d);
+
+		requestAnimationFrame(render);
 	}
+
 });
