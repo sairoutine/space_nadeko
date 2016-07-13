@@ -4,11 +4,6 @@
 var WIDTH = window.innerWidth;
 var HEIGHT = window.innerHeight;
 $(function () {
-	var renderer = new THREE.WebGLRenderer();
-
-	renderer.setSize(window.innerWidth, window.innerHeight);
-	renderer.autoClear = false ;
-
 	// 惑星
 	var planet = (function() {
 		var planetGeometry = new THREE.SphereGeometry(4,20,20);
@@ -105,6 +100,14 @@ $(function () {
 
 	// 2Dシーン
 	var scene2d = create2DScene();
+
+	var renderer = (function() {
+		var renderer = new THREE.WebGLRenderer();
+
+		renderer.setSize(window.innerWidth, window.innerHeight);
+		renderer.autoClear = false ;
+		return renderer;
+	})();
 
 	$("#WebGL-output"). append(renderer.domElement);
 	//call render loop once
