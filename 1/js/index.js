@@ -6,22 +6,25 @@ var HEIGHT = window.innerHeight;
 $(function () {
 	// 惑星
 	var planet = (function() {
+
 		var planetGeometry = new THREE.SphereGeometry(4,20,20);
+		var planetMaterial = (function() {
+			var planetMaterial = new THREE.MeshPhongMaterial();
 
-		//Load the planet textures
-		var texture = THREE.ImageUtils.loadTexture("./img/planet-512.jpg");
-		var normalmap = THREE.ImageUtils.loadTexture("./img/normal-map-512.jpg");
-		var specmap = THREE.ImageUtils.loadTexture("./img/water-map-512.jpg");
+			var texture = THREE.ImageUtils.loadTexture("./img/planet-512.jpg");
+			planetMaterial.map = texture;
 
-		var planetMaterial = new THREE.MeshPhongMaterial();
-		planetMaterial.map = texture;
+			var specmap = THREE.ImageUtils.loadTexture("./img/water-map-512.jpg");
+			planetMaterial.specularMap = specmap;
+			planetMaterial.specular = new THREE.Color( 0xff0000 );
+			planetMaterial.shininess = 1;
 
-		planetMaterial.specularMap = specmap;
-		planetMaterial.specular = new THREE.Color( 0xff0000 );
-		planetMaterial.shininess = 1;
+			var normalmap = THREE.ImageUtils.loadTexture("./img/normal-map-512.jpg");
+			planetMaterial.normalMap = normalmap;
+			planetMaterial.normalScale.set(-0.3,-0.3);
 
-		planetMaterial.normalMap = normalmap;
-		planetMaterial.normalScale.set(-0.3,-0.3);
+			return planetMaterial;
+		})();
 
 		var planet = new THREE.Mesh(planetGeometry, planetMaterial);
 
