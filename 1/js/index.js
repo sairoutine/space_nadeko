@@ -1,8 +1,8 @@
 /* global $, THREE */
 'use strict';
 
-var WIDTH = window.innerWidth;
-var HEIGHT = window.innerHeight;
+var WIDTH = 600;
+var HEIGHT = 480;
 $(function () {
 	// 惑星
 	var planet = (function() {
@@ -124,7 +124,7 @@ $(function () {
 	var renderer = (function() {
 		var renderer = new THREE.WebGLRenderer();
 
-		renderer.setSize(window.innerWidth, window.innerHeight);
+		renderer.setSize(WIDTH, HEIGHT);
 		renderer.autoClear = false ;
 		return renderer;
 	})();
