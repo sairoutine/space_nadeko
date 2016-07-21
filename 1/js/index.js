@@ -1,8 +1,26 @@
-/* global $, THREE */
+/* global $, THREE, dat */
 'use strict';
 
 var WIDTH = 600;
 var HEIGHT = 480;
+
+var Config = function() {
+	this.x = 0;
+	this.y = 0;
+	this.z = -15;
+};
+var config = new Config();
+
+window.onload = function() {
+	var gui = new dat.GUI();
+	gui.add(config, 'x', -50, 50);
+	gui.add(config, 'y', -50, 50);
+	gui.add(config, 'z', -50, 50);
+};
+
+
+
+
 $(function () {
 	// 惑星
 	var planet = (function() {
@@ -139,6 +157,9 @@ $(function () {
 		//rotate planet and spacesphere
 		planet.rotation.y += 0.002;
 		spacesphere.rotation.y += 0.001;
+		camera.position.x = config.x;
+		camera.position.y = config.y;
+		camera.position.z = config.z;
 
 		renderer.render(scene, camera);
 		renderer.render(scene2d, camera2d);
